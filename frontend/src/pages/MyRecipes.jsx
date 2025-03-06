@@ -33,7 +33,7 @@ const MyRecipes = () => {
     if (!window.confirm("Are you sure you want to delete this recipe?")) return;
 
     try {
-      await axios.delete(`http://localhost:3000/deleterecipe/${id}`);
+      await axios.delete(`https://recipe-avij.onrender.com/deleterecipe/${id}`);
       setRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe._id !== id));
 
       if (selectedRecipe && selectedRecipe._id === id) {
