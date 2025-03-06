@@ -90,12 +90,7 @@ const AdminLogin = () => {
           {showNote ? "Hide Note" : "Show Note"}
         </button>
 
-        {/* Note Section (Hidden by Default) */}
-        {showNote && (
-          <div className="alert alert-warning mt-3">
-            <strong>Note:</strong> Email:Admin@gmail.com ,Password:Admin123
-          </div>
-        )}
+        
       </form>
     </div>
   );
