@@ -15,7 +15,7 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+  const API_URL = process.env.REACT_APP_API_URL || 'https://recipe-avij.onrender.com';
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
