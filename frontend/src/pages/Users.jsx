@@ -8,7 +8,7 @@ export default function Users() {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/user";
+  const API_URL = process.env.REACT_APP_API_URL || "https://recipe-avij.onrender.com/user";
   const DELETE_URL = "http://localhost:3000/deleteuser";
 
   useEffect(() => {
