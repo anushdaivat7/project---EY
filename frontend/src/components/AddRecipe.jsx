@@ -20,7 +20,7 @@ const RecipeApp = () => {
     const token = localStorage.getItem("userToken"); // Assuming the user token is stored in localStorage
     if (token) {
       axios
-        .get("http://localhost:3000/user", { headers: { Authorization: `Bearer ${token}` } })
+        .get("https://recipe-avij.onrender.com/user", { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           setUsername(res.data.username);
         })
@@ -34,7 +34,7 @@ const RecipeApp = () => {
   // Fetch recipes from backend
   useEffect(() => {
     axios
-      .get("http://localhost:3000/recipes")
+      .get("https://recipe-avij.onrender.com/recipes")
       .then((res) => {
         console.log("Fetched recipes:", res.data);
         setRecipes(Array.isArray(res.data) ? res.data : res.data.data);
@@ -54,16 +54,30 @@ const RecipeApp = () => {
       };
 
       try {
-        const res = await axios.post("http://localhost:3000/addrecipes", newRecipe);
-        setRecipes((prev) => [res.data, ...prev]);
-        setSubmitted(true);
-        setTimeout(() => setSubmitted(false), 3000);
+        // Log the newRecipe object before sending to server
+        console.log(newRecipe);
 
-        // Reset form
-        setFormData({ title: "", ingredients: "", instructions: "", image: "", author: "" });
-        setPreview("");
+        // Check if token exists for authorization
+        const token = localStorage.getItem("userToken");
+        if (token) {
+          const res = await axios.post(
+            "https://recipe-avij.onrender.com/addrecipes",
+            newRecipe,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          setRecipes((prev) => [res.data, ...prev]);
+          setSubmitted(true);
+          setTimeout(() => setSubmitted(false), 3000);
+
+          // Reset form
+          setFormData({ title: "", ingredients: "", instructions: "", image: "", author: "" });
+          setPreview("");
+        } else {
+          console.error("No authorization token found.");
+        }
       } catch (err) {
-        console.error("Error submitting recipe:", err);
+        // More detailed error handling
+        console.error("Error submitting recipe:", err.response ? err.response.data : err.message);
       }
     }
   };
