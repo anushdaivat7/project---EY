@@ -29,6 +29,7 @@ const Signup = () => {
       try {
         const { confirmPassword, ...dataToSend } = formData;
 
+        // Change the URL to use /adduser for the API request
         const response = await axios.post(`${API_URL}/adduser`, dataToSend);
 
         toast.success('User registered successfully!');
