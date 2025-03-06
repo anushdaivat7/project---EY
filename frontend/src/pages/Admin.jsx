@@ -11,7 +11,7 @@ const AdminLogin = () => {
   const [showNote, setShowNote] = useState(false); // ✅ Toggle note visibility
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:3000/admin/login"; // Backend API
+  const API_URL = "https://recipe-avij.onrender.com/login"; // Backend API
 
   // Handle input changes
   const handleChange = (e) => {
