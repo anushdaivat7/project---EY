@@ -10,7 +10,7 @@ const MyRecipes = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/getrecipe");
+        const response = await axios.get("https://recipe-avij.onrender.com/getrecipe");
         console.log("API Response:", response.data);
 
         if (response.data && Array.isArray(response.data.data)) {
