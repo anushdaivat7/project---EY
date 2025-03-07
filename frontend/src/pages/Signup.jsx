@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -29,11 +31,15 @@ const Signup = () => {
       try {
         const { confirmPassword, ...dataToSend } = formData;
 
-        // Change the URL to use /adduser for the API request
-        const response = await axios.post(`${API_URL}/adduser`, dataToSend);
+        // API call for registration
+        await axios.post(`${API_URL}/adduser`, dataToSend);
 
-        toast.success('User registered successfully!');
-        console.log('User registered:', response.data);
+        toast.success('User registered successfully! Redirecting to login...');
+        
+        // Delay for toast message, then navigate
+        setTimeout(() => {
+          navigate('/login'); // Redirect to login page
+        }, 2000);
 
         // Reset form
         setFormData({
@@ -69,7 +75,7 @@ const Signup = () => {
 
   return (
     <div className="container mt-4">
-      <ToastContainer /> {/* This must be added once */}
+      <ToastContainer />
       <div className="row justify-content-center">
         <div className="col-md-8">
           <div className="form-container">
